@@ -1,4 +1,4 @@
-var UserList = Backbone.Collection.extend({
+var UserCollection = Backbone.Collection.extend({
   model: User,
-  url: 'http://localhost:1234//api/users'
+  url: 'http://localhost:1234/api/users'
 });

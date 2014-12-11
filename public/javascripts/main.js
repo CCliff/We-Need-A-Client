@@ -22,12 +22,26 @@ function parseQueryString(queryString){
 }
 
 $(function() {
-    gameCollection = new GamesCollection({model: Game});
+    var gameCollection = new GamesCollection();
+    var gameRouter;
 
-    gameRouter = new GameRouter({
-      collection: gameCollection,
-      $el: $('body')
-  });
+    gameCollection.fetch().done(function(){
+        gameRouter = new GameRouter({
+          collection: gameCollection,
+          $el: $('.content')
+        });
+    });
+
+    var userCollection = new UserCollection();
+    var userRouter;
+    userCollection.fetch().done(function(){
+        userRouter = new UserRouter({
+            collection: userCollection,
+            $el: $('.content')
+        });
+    });
 
     Backbone.history.start();
+    gameRouter.navigate(Backbone.history.fragment, {trigger:true});
+    userRouter.navigate(Backbone.history.fragment, {trigger:true});
 });

@@ -1,11 +1,12 @@
-var GameRouter = Backbone.Router.extend({
+var UserRouter = Backbone.Router.extend({
+
   initialize: function(options){
     this.collection = options.collection;
     this.$el = options.$el;
   },
   routes: {
-    'games(?*:queryString)' : 'listGames',
-    'games/:id' : 'showGame'
+    'users(?*:queryString)' : 'listUsers',
+    'users/:id' : 'showUser'
   },
   setView: function(view) {
     if(this.view){
@@ -15,22 +16,20 @@ var GameRouter = Backbone.Router.extend({
     this.view = view;
     this.$el.html(this.view.render().$el);
   },
-  listGames: function(queryString){
+  listUsers: function(queryString){
     var collectionFilter = parseQueryString(queryString);
     var that = this;
     this.collection.fetch({data: collectionFilter, success: function(e) {
-      var view = new GameListView({ collection: that.collection });
+      var view = new UserListView({ collection: that.collection });
       that.setView(view);
     }, error: function(){
       console.log('error');
     }
   });    
-
   },
-  showGame: function(gameid){
-    var game = this.collection.findWhere({id: parseInt(gameid)});
-    var view = new GameView({ model: game });
+  showUser: function(gameid){
+    var user = this.collection.findWhere({id: parseInt(gameid)});
+    var view = new UserView({ model: user });
     this.setView(view);
   }
 });
-
