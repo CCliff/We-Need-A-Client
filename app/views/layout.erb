@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>We Need A...</title>
+  <script src='/javascripts/lib/jquery-1.11.1.min.js'></script>
+  <script src='/javascripts/lib/underscore-min.js'></script>
+  <script src='/javascripts/lib/backbone-min.js'></script>
+</head>
+<body>
+
+  <%= yield %>
+
+  <script type="text/template" id="game-list-template">
+  <%% _.each(collection, function(item, index) { %>
+    <div class="game">
+      <div class="game-date"><%%= item.date %></div>
+      <div class="game-location"><%%= item.location %></div>
+      <div class="game-sport"><%%= item.sport %></div>
+      <div class="game-team-name"><%%= item.teamName %></div>
+    </div>
+    <%% }); %>
+  </script>
+
+  <script type="text/template" id="game-template">
+    <div class="game">
+      <div class="game-date"><%%= date %></div>
+      <div class="game-location"><%%= location %></div>
+      <div class="game-sport"><%%= sport %></div>
+      <div class="game-team-name"><%%= teamName %></div>
+    </div>
+  </script>
+
+  <script src='/javascripts/models/game.js'></script>
+  <script src='/javascripts/collections/game-list.js'></script>
+  <script src='/javascripts/views/game-view.js'></script>
+  <script src='/javascripts/views/game-list-view.js'></script>
+  <script src='/javascripts/routers/game-router.js'></script>
+  <script src='/javascripts/main.js'></script>
+
+</body>
+</html>
