@@ -1,0 +1,42 @@
+<form action="" id="user-login">
+  <input type="text" name="username" placeholder="Username">
+  <input type="text" name="password" placeholder="Password">
+  <input type="submit" value="Login">
+</form>
+
+<script>
+
+  $(function(){
+
+    $registerForm = $('#user-login');
+    $registerForm.on('submit', function(e){
+      e.preventDefault();
+      var data = {};
+      data.username = $('input[name="username"]').val();
+      data.password = $('input[name="password"]').val();
+      $.ajax({
+        method: 'post',
+        url: 'http://localhost:1234/sessions/new',
+        data: data,
+        dataType: 'json',
+        success: function(data){
+          if(data){
+            console.log(data);
+            userID = data;
+            // $.ajax({
+            //   url: '/login',
+            //   method:'post',
+            //   data: {user_id: userID},
+            //   success:function(){
+            //     window.location.replace('/');
+            //   }
+            // });
+            gameRouter.navigate('games?location=manhattan');
+          }else{
+            $('body').prepend($('<p> Please Try Again </p>'));
+          }
+        }
+      });
+    });
+  });
+</script>

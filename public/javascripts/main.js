@@ -23,8 +23,7 @@ function parseQueryString(queryString){
 
 $(function() {
     var gameCollection = new GamesCollection();
-    var gameRouter;
-
+    console.log("GAME ROUTER?!")
     gameCollection.fetch().done(function(){
         gameRouter = new GameRouter({
           collection: gameCollection,
@@ -39,9 +38,6 @@ $(function() {
             collection: userCollection,
             $el: $('.content')
         });
+        Backbone.history.start(); 
     });
-
-    Backbone.history.start();
-    gameRouter.navigate(Backbone.history.fragment, {trigger:true});
-    userRouter.navigate(Backbone.history.fragment, {trigger:true});
 });

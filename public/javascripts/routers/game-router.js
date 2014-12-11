@@ -16,16 +16,17 @@ var GameRouter = Backbone.Router.extend({
     this.$el.html(this.view.render().$el);
   },
   listGames: function(queryString){
+    console.log('inside listGames');
     var collectionFilter = parseQueryString(queryString);
     var that = this;
-    this.collection.fetch({data: collectionFilter, success: function(e) {
-      var view = new GameListView({ collection: that.collection });
-      that.setView(view);
-    }, error: function(){
-      console.log('error');
-    }
-  });    
-
+    this.collection.fetch({
+      data: collectionFilter, 
+      success: function(e) {
+        var view = new GameListView({ collection: that.collection });
+        that.setView(view);
+      },
+      error: function(e) { debugger; }
+    });    
   },
   showGame: function(gameid){
     var game = this.collection.findWhere({id: parseInt(gameid)});
