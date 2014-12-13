@@ -1,11 +1,11 @@
-var GameRouter = Backbone.Router.extend({
+var Router = Backbone.Router.extend({
   initialize: function(options){
     this.collection = options.collection;
     this.$el = options.$el;
   },
-  routes: {
-    'games(?*:queryString)' : 'listGames',
-    'games/:id' : 'showGame'
+  routes:{
+    'players(?*:queryString)' : 'listPlayers',
+    'players/:id' : 'showPlayer'
   },
   setView: function(view) {
     if(this.view){
@@ -15,23 +15,15 @@ var GameRouter = Backbone.Router.extend({
     this.view = view;
     this.$el.html(this.view.render().$el);
   },
-  listGames: function(queryString){
-    console.log('inside listGames');
+  listPlayers: function(queryString){
     var collectionFilter = parseQueryString(queryString);
     var that = this;
     this.collection.fetch({
       data: collectionFilter, 
       success: function(e) {
-        var view = new GameListView({ collection: that.collection });
+        var view = new PlayerListView({ collection: that.collection });
         that.setView(view);
-      },
-      error: function(e) { debugger; }
+      }
     });    
   },
-  showGame: function(gameid){
-    var game = this.collection.findWhere({id: parseInt(gameid)});
-    var view = new GameView({ model: game });
-    this.setView(view);
-  }
 });
-

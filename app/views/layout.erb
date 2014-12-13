@@ -6,64 +6,29 @@
   <script src='/javascripts/lib/jquery-1.11.1.min.js'></script>
   <script src='/javascripts/lib/underscore-min.js'></script>
   <script src='/javascripts/lib/backbone-min.js'></script>
+
+  <script type="text/template" id="player-template">
+  
+    <div class="players">
+      <%% _.each(collection, function(player, index)%>
+        <div class="player">
+          <div class="player-name"><%%=player.lastName + ", "+ player.firstName%></div>
+        </div>
+      <%%});%>
+    </div>
+
+  </script>
+
 </head>
 <body>
 
   <%= yield %>
 
-  <script type="text/template" id="user-list-template">
-  <%% _.each(collection, function(item, index) { %>
-    <a href="#/users/<%%= item.id %>">
-      <div class="user">
-        <div class="user-username"><%%= item.username %></div>
-        <div class="user-location"><%%= item.locations %></div>
-        <div class="user-sport"><%%= item.sports %></div>
-      </div>
-    </a>
-    <%% }); %>
-  </script>
-
-    <script type="text/template" id="user-template">
-    <div class="user">
-      <div class="user-username"><%%= username %></div>
-      <div class="user-location"><%%= locations %></div>
-      <div class="user-sport"><%%= sports %></div>
-    </div>
-  </script>
-
-  <script type="text/template" id="game-list-template">
-  <%% _.each(collection, function(item, index) { %>
-    <a href="#/games/<%%= item.id %>">
-      <div class="game">
-        <div class="game-date"><%%= item.date %></div>
-        <div class="game-location"><%%= item.location %></div>
-        <div class="game-sport"><%%= item.sport %></div>
-        <div class="game-team-name"><%%= item.teamName %></div>
-      </div>
-    </a>
-    <%% }); %>
-  </script>
-
-  <script type="text/template" id="game-template">
-    <div class="game">
-      <div class="game-date"><%%= date %></div>
-      <div class="game-location"><%%= location %></div>
-      <div class="game-sport"><%%= sport %></div>
-      <div class="game-team-name"><%%= teamName %></div>
-    </div>
-  </script>
-
-  <script src='/javascripts/models/game.js'></script>
-  <script src='/javascripts/collections/game-list.js'></script>
-  <script src='/javascripts/views/game-view.js'></script>
-  <script src='/javascripts/views/game-list-view.js'></script>
-  <script src='/javascripts/routers/game-router.js'></script>
-  <script src='/javascripts/models/user.js'></script>
-  <script src='/javascripts/collections/user-list.js'></script>
-  <script src='/javascripts/views/user-view.js'></script>
-  <script src='/javascripts/views/user-list-view.js'></script>
-  <script src='/javascripts/routers/user-router.js'></script>
+  <script src='/javascripts/models/player.js'></script>
+  <script src='/javascripts/collections/player-collection.js'></script>
+  <script src='/javascripts/views/player-view.js'></script>
+  <script src='/javascripts/views/player-collection-view.js'></script>
+  <script src='/javascripts/routers/router.js'></script>
   <script src='/javascripts/main.js'></script>
-
 </body>
 </html>

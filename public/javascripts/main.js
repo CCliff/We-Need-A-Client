@@ -16,28 +16,18 @@ function parseQueryString(queryString){
             function(obj){
                 _.extend(targetObject, obj);
             }
-            );
+        );
     }
     return targetObject;
 }
 
-$(function() {
-    var gameCollection = new GamesCollection();
-    console.log("GAME ROUTER?!")
-    gameCollection.fetch().done(function(){
-        gameRouter = new GameRouter({
-          collection: gameCollection,
-          $el: $('.content')
-        });
+$(function(){
+    var playerCollection = new PlayerCollection();
+    var router;
+    router = new Router({
+        collection: playerCollection,
+        $el: $('.content')
     });
 
-    var userCollection = new UserCollection();
-    var userRouter;
-    userCollection.fetch().done(function(){
-        userRouter = new UserRouter({
-            collection: userCollection,
-            $el: $('.content')
-        });
-        Backbone.history.start(); 
-    });
+    Backbone.history.start();
 });
